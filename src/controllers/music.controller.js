@@ -56,4 +56,15 @@ async function getAllAlbums (req , res) {
    res.status(201).json({message : 'Albums fetched successfully', albums : albums});
 }
 
-module.exports = { createMusic, createAlbum , getAllMusics , getAllAlbums};
+async function geAlbumById(req , res) {
+  const albumId = req.params.albumId;
+  const album = await albumModel.findById(albumId).populate("artist" ,  "username email").populate("musics");
+  return res.status(200).json({
+    message : 'Album fetched successfully',
+    album : album
+  })
+
+
+}
+
+module.exports = { createMusic, createAlbum , getAllMusics , getAllAlbums , geAlbumById};

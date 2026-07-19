@@ -14,8 +14,9 @@ async function registerUser (req, res) {
    if (isUserAlreadyExists) {
     return res.status(409).json({message : 'User Already Exists'});
    }
+   const hash = await bcrypt.hash(password, 10);
    const user = await userModel.create({
-    username, email, password, role
+    username, email, password : hash, role
    });
 
    const token = jwt.sign({id : user._id, role : user.role}, process.env.JWT_SECRET);
@@ -27,3 +28,5 @@ async function registerUser (req, res) {
     role : user.role
    }});
 }
+
+module.exports = {registerUser};

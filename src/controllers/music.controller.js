@@ -13,5 +13,9 @@ async function createMusic (req, res) {
     } catch (e) {
 return res.status(401).json({message : 'Unauthorized'});
     }
+
+    const {title} = req.body;
+    const file = req.file;
+
   }
 }

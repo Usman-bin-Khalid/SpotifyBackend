@@ -53,8 +53,8 @@ async function createAlbum(req , res) {
           return res.status(403).json({message : 'You do not have access to create album'});
 
          }
-         const {title, musicIds} = req.body;
-         const album = await albumModel.create({title, artist : decoded.id, musics : musicIds});
+         const {title, musics} = req.body;
+         const album = await albumModel.create({title, artist : decoded.id, musics : musics});
          res.status(201).json({
           message : 'Album created successfully',
           album : {
@@ -69,4 +69,4 @@ async function createAlbum(req , res) {
      return res.status(401).json({message : 'Unauthorized'});
   }
 }
-module.exports = {createMusic};
+module.exports = {createMusic , createAlbum};

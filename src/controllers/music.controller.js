@@ -43,7 +43,8 @@ async function createAlbum(req, res) {
 }
 
 async function getAllMusics (req, res) {
-  const musics = await musicModel.find();
+  const musics = await musicModel.find().populate('artist'); // Populate ka function use krny sy artist ki pori detail
+  // fetch ho kr ajai gi
   res.status(200).json({
     message : 'Musics fetched successfully',
     musics : musics
